@@ -7,7 +7,7 @@ module.exports = {
   },
   purge: {
     mode: 'all',
-    content: ['**/*.{njk,js,ts}'],
+    content: ['src/**/*.{njk,js,ts}'],
     options: {
       keyframes: true,
     },
