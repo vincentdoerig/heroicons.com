@@ -61,7 +61,13 @@ function copyIcon(target: HTMLElement, code: string): void {
     group.classList.remove('group')
     group.classList.add('copied', 'pointer-events-none')
     window.setTimeout(() => {
-      group.classList.add('group')
+      function reAddGroupClass() {
+        group.classList.add('group')
+        window.removeEventListener('mousemove', reAddGroupClass)
+        window.removeEventListener('focus', reAddGroupClass, true)
+      }
+      window.addEventListener('mousemove', reAddGroupClass)
+      window.addEventListener('focus', reAddGroupClass, true)
       group.classList.remove('copied', 'pointer-events-none')
     }, 1000)
   })
