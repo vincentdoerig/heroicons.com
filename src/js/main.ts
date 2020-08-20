@@ -48,6 +48,19 @@ $searchInput.addEventListener('input', (e) => {
   search((e.target as HTMLInputElement).value)
 })
 
+function copyIcon(target: HTMLElement, code: string): void {
+  navigator.clipboard.writeText(code).then(() => {
+    target.blur()
+    const group = target.closest('.group') as HTMLElement
+    group.classList.remove('group')
+    group.classList.add('copied', 'pointer-events-none')
+    window.setTimeout(() => {
+      group.classList.add('group')
+      group.classList.remove('copied', 'pointer-events-none')
+    }, 1000)
+  })
+}
+
 window.addEventListener('click', (e) => {
   const target = e.target as HTMLElement
   const copy = target.getAttribute('data-copy')
@@ -72,9 +85,7 @@ window.addEventListener('click', (e) => {
     .replace(/>\s+?<\/([^>]+)>/g, ' />')
 
   if (copy === 'html') {
-    navigator.clipboard.writeText(svg).then(() => {
-      console.log('Copied HTML:', svg)
-    })
+    copyIcon(target, svg)
     return
   }
 
@@ -89,7 +100,7 @@ window.addEventListener('click', (e) => {
     }
   )
   navigator.clipboard.writeText(jsx).then(() => {
-    console.log('Copied JSX:', jsx)
+    copyIcon(target, jsx)
   })
 })
 

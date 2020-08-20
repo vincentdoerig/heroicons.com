@@ -4,23 +4,24 @@
       <h3>
         {{ icon.name }}
         {% if icon.new %}
-          <small class="absolute top-px right-px mt-1 mr-1 rounded-full text-xs leading-5 font-medium px-2 pointer-events-none bg-yellow-100 text-orange-700 group-hover:opacity-0 group-focus-within:opacity-0">
+          <small class="absolute top-px right-px mt-1 mr-1 rounded-full text-xs leading-5 font-medium px-2 pointer-events-none bg-yellow-100 text-orange-700 group-hover:opacity-0 group-focus-within:opacity-0 transition-opacity duration-150">
             <span class="sr-only">(</span>New<span class="sr-only">)</span>
           </small>
         {% endif %}
       </h3>
       <div class="relative rounded-lg mb-3 border border-gray-200 overflow-hidden">
-        <div class="absolute inset-0 flex items-center justify-center rounded-lg">
+        <div class="absolute inset-0 flex items-center justify-center transform copied:-translate-y-3 transition-transform duration-300">
           {{ icon.svg | safe }}
         </div>
-        <div class="bg-white bg-opacity-75 relative z-10 p-1 space-y-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100">
-          <button type="button" class="block w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 rounded-md py-3 text-purple-700" data-copy="html">
+        <div class="absolute bottom-1 left-0 right-0 pointer-events-none text-center font-medium py-3 text-purple-700 opacity-0 copied:opacity-100 transform -translate-y-1 copied:translate-y-0 transition-all duration-300 copied:delay-100" aria-hidden="true">Copied!</div>
+        <div class="bg-white bg-opacity-75 relative z-10 p-1 space-y-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity duration-150">
+          <button type="button" class="block w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 rounded-md py-3 text-purple-700 transition-colors duration-150" data-copy="html">
             Copy SVG<span class="sr-only">
               for
               {{ icon.name }}
               icon</span>
           </button>
-          <button type="button" class="block w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 rounded-md py-3 text-purple-700" data-copy="jsx">
+          <button type="button" class="block w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 rounded-md py-3 text-purple-700 transition-colors duration-150" data-copy="jsx">
             Copy JSX<span class="sr-only">
               for
               {{ icon.name }}
