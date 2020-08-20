@@ -3,7 +3,8 @@ import iconTags from '../data/iconTags'
 
 const $smallContainer = document.getElementById('small')
 const $mediumContainer = document.getElementById('medium')
-const $searchInput = document.getElementById('search') as HTMLInputElement
+const $searchForm = document.getElementById('search')
+const $searchInput = document.getElementById('search-input') as HTMLInputElement
 const $icons: HTMLLIElement[] = Array.from(
   document.querySelectorAll('[data-name]')
 )
@@ -43,6 +44,10 @@ function search(query: string): void {
   $smallContainer.append(...matchedNames.map((name) => icons[name].small))
   $mediumContainer.append(...matchedNames.map((name) => icons[name].medium))
 }
+
+$searchForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+})
 
 $searchInput.addEventListener('input', (e) => {
   search((e.target as HTMLInputElement).value)
