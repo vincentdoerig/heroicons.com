@@ -1,5 +1,6 @@
 import matchSorter from 'match-sorter'
 import iconTags from '../data/iconTags'
+import debounce from 'debounce'
 
 const $smallContainer = document.getElementById('small')
 const $mediumContainer = document.getElementById('medium')
@@ -30,7 +31,7 @@ for (let i = 0; i < $icons.length; i++) {
   })
 }
 
-function search(query: string): void {
+const search = debounce((query: string): void => {
   let matches = matchSorter(index, query, {
     keys: ['name', 'tags'],
   })
@@ -43,7 +44,7 @@ function search(query: string): void {
     })
   $smallContainer.append(...matchedNames.map((name) => icons[name].small))
   $mediumContainer.append(...matchedNames.map((name) => icons[name].medium))
-}
+})
 
 $searchForm.addEventListener('submit', (e) => {
   e.preventDefault()
