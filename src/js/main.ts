@@ -84,7 +84,7 @@ window.addEventListener('click', (e) => {
     })
     .replace(/>\s+?<\/([^>]+)>/g, ' />')
 
-  if (copy === 'html') {
+  if (copy === 'svg') {
     copyIcon(target, svg)
     return
   }

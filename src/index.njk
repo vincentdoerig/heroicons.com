@@ -9,136 +9,145 @@
     </style>
   </head>
   <body>
-    <header class="bg-gradient-to-r from-purple-700 px-16 divide-y divide-black divide-opacity-12" style="--gradient-to-color:#A65FEC;">
-      <div class="py-6 flex items-center text-sm leading-5">
-        {{'img/logo.svg' | build | safe}}
-        <div class="flex space-x-10 ml-auto">
-          <a href="#" class="flex items-center space-x-2 text-white hover:text-purple-200 font-semibold">
-            <svg width="20" height="20" fill="currentColor" class="text-white opacity-40">
-              <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"/>
-            </svg>
-            <p>Share on Twitter</p>
-          </a>
-          <a href="#" class="group text-purple-200">Looking for Heroicons Classic?
-            <strong class="font-semibold text-white group-hover:text-purple-200">Get them here -></strong>
-          </a>
+    <header class="bg-gradient-to-r from-purple-700 to-purple-400-ish px-4 sm:px-6 lg:px-16">
+      <div class="max-w-container mx-auto divide-y divide-black divide-opacity-12">
+        <div class="py-6 flex items-center text-sm leading-5">
+          {{'img/logo.svg' | build | safe}}
+          <div class="flex space-x-10 ml-auto">
+            <a href="#" class="flex items-center space-x-2 text-white hover:text-purple-200 transition-colors duration-150 font-semibold">
+              <svg width="20" height="20" fill="currentColor" class="text-white opacity-40">
+                <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"/>
+              </svg>
+              <p>Share<span class="sr-only sm:not-sr-only">
+                  on Twitter</span></p>
+            </a>
+            <a href="https://classic.heroicons.com" class="hidden md:block group text-purple-200">Looking for Heroicons Classic?
+              <strong class="font-semibold text-white group-hover:text-purple-200 transition-colors duration-150">Get them here -></strong>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="py-14 flex items-center flex-wrap">
-        <div class="flex-auto">
-          <h1 class="font-display text-white text-4xl leading-10 font-semibold whitespace-no-wrap">Beautiful hand-crafted SVG icons,<span class="block text-purple-300">
-              by the makers of Tailwind CSS.</span></h1>
-          <dl class="flex text-purple-100 font-medium space-x-8 mt-6">
-            <div class="flex items-center">
-              <dt class="mr-2">
-                <span class="sr-only">Number of icons</span>
-                <svg width="20" height="20" viewbox="0 0 20 20" fill="currentColor" class="text-purple-400">
-                  <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
-                </svg>
-              </dt>
-              <dd>{{ allIcons.count }}
-                Icons</dd>
+        <div class="sm:pt-4 pb-10 sm:pb-14 flex items-center flex-wrap">
+          <div class="flex-auto mt-10">
+            <h1 class="font-display text-white text-3xl sm:text-4xl leading-10 font-semibold">Beautiful hand-crafted SVG icons,<span class="sm:block text-purple-300">
+                by the makers of Tailwind CSS.</span></h1>
+            <dl class="flex flex-wrap whitespace-no-wrap text-purple-100 font-medium mt-3 leading-5">
+              <div class="flex items-center mr-8 mt-3">
+                <dt class="mr-2">
+                  <span class="sr-only">Number of icons</span>
+                  <svg width="20" height="20" viewbox="0 0 20 20" fill="currentColor" class="text-purple-400">
+                    <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+                  </svg>
+                </dt>
+                <dd>{{ allIcons.count }}
+                  Icons</dd>
+              </div>
+              <div class="flex items-center mr-8 mt-3">
+                <dt class="mr-2">
+                  <span class="sr-only">License</span>
+                  <svg width="20" height="20" viewbox="0 0 20 20" fill="currentColor" class="text-purple-400">
+                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1zm-5 8.274l-.818 2.552c.25.112.526.174.818.174.292 0 .569-.062.818-.174L5 10.274zm10 0l-.818 2.552c.25.112.526.174.818.174.292 0 .569-.062.818-.174L15 10.274z" clip-rule="evenodd"/>
+                  </svg>
+                </dt>
+                <dd>MIT Licensed</dd>
+              </div>
+              <div class="flex items-center mt-3">
+                <dt class="mr-2">
+                  <span class="sr-only">Version</span>
+                  <svg width="20" height="20" viewbox="0 0 20 20" fill="currentColor" class="text-purple-400">
+                    <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                  </svg>
+                </dt>
+                <dd>Version 1.7.1</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="w-full sm:w-auto flex-none flex flex-col-reverse sm:flex-row sm:items-start space-y-3 space-y-reverse sm:space-y-0 sm:space-x-4 mt-10">
+            <div>
+              <a href="#" class="group flex">
+                <div class="w-full sm:w-auto inline-flex items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                  <svg width="24" height="24" fill="none" viewbox="0 0 24 24" stroke="currentColor" class="text-purple-400 mr-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"/>
+                  </svg>
+                  Download all
+                </div>
+              </a>
+              <p class="text-sm leading-5 font-medium text-purple-200 text-center mt-3">Includes Figma file</p>
             </div>
-            <div class="flex items-center">
-              <dt class="mr-2">
-                <span class="sr-only">License</span>
-                <svg width="20" height="20" viewbox="0 0 20 20" fill="currentColor" class="text-purple-400">
-                  <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1zm-5 8.274l-.818 2.552c.25.112.526.174.818.174.292 0 .569-.062.818-.174L5 10.274zm10 0l-.818 2.552c.25.112.526.174.818.174.292 0 .569-.062.818-.174L15 10.274z" clip-rule="evenodd"/>
+            <a href="https://github.com/tailwindlabs/heroicons" class="group flex">
+              <div class="w-full sm:w-auto inline-flex items-center justify-center text-white font-medium bg-white bg-opacity-20 group-hover:bg-opacity-30 rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-white border-opacity-10 transform group-hover:-translate-y-0.5 transition-all duration-150">
+                <svg width="24" height="24" fill="currentColor" class="text-white mr-3 text-opacity-50">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"/>
                 </svg>
-              </dt>
-              <dd>MIT Licensed</dd>
-            </div>
-            <div class="flex items-center">
-              <dt class="mr-2">
-                <span class="sr-only">Version</span>
-                <svg width="20" height="20" viewbox="0 0 20 20" fill="currentColor" class="text-purple-400">
-                  <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-                </svg>
-              </dt>
-              <dd>Version 1.7.1</dd>
-            </div>
-          </dl>
-        </div>
-        <div class="flex-none flex items-start space-x-4">
-          <div>
-            <a href="#" class="group flex">
-              <div class="inline-flex items-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5">
-                <svg width="24" height="24" fill="none" viewbox="0 0 24 24" stroke="currentColor" class="text-purple-400 mr-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"/>
-                </svg>
-                Download all
+                View on GitHub
               </div>
             </a>
-            <p class="text-sm leading-5 font-medium text-purple-200 text-center mt-3">Includes Figma file</p>
           </div>
-          <a href="#" class="group flex">
-            <div class="inline-flex items-center text-white font-medium bg-white bg-opacity-20 group-hover:bg-opacity-30 rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-white border-opacity-10 transform group-hover:-translate-y-0.5">
-              <svg width="24" height="24" fill="currentColor" class="text-white mr-3 text-opacity-50">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"/>
-              </svg>
-              View on GitHub
-            </div>
-          </a>
         </div>
       </div>
     </header>
 
     <main class="bg-white">
-      <form class="group sticky top-0 z-50 bg-white px-16 shadow flex items-center">
-        <svg width="24" height="24" fill="none" viewbox="0 0 24 24" stroke="currentColor" class="flex-none text-gray-400 group-focus-within:text-gray-500 mr-3">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-        <input type="text" id="search" placeholder="Search all {{ allIcons.count }} icons (Press “/” to focus)" class="flex-auto py-6 text-gray-500 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400">
+      <form class="group sticky top-0 z-50 bg-white px-4 sm:px-6 lg:px-16 shadow">
+        <div class="max-w-container mx-auto flex items-center">
+          <svg width="24" height="24" fill="none" viewbox="0 0 24 24" stroke="currentColor" class="flex-none text-gray-400 group-focus-within:text-gray-500 transition-colors duration-150 mr-3">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input type="text" id="search" placeholder="Search all {{ allIcons.count }} icons (Press “/” to focus)" class="flex-auto py-6 text-gray-500 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400">
+        </div>
       </form>
 
-      <div class="flex divide-x divide-gray-200 px-16">
-        <section class="flex-none w-1/2 pr-8 pt-8 pb-12">
-          <header class="flex flex-wrap items-baseline mb-8">
-            <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Medium</h2>
-            <p class="flex-auto text-gray-400 text-sm leading-5 font-medium">2px stroke weight, 24x24 bounding box</p>
-            <p class="flex-none w-full text-sm leading-5 mt-3">For primary navigation and marketing sections, designed to be rendered at 24x24.</p>
-          </header>
-          {% set iconStyle = 'medium' %}
-          {% include 'icons.njk' %}
-        </section>
-        <section class="flex-none w-1/2 pl-8 pt-8 pb-12">
-          <header class="flex flex-wrap items-baseline mb-8">
-            <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Small</h2>
-            <p class="flex-auto text-gray-400 text-sm leading-5 font-medium">Solid fill, 20x20 bounding box</p>
-            <p class="flex-none w-full text-sm leading-5 mt-3">For buttons, form elements, and to support text, designed to be rendered at 20x20.</p>
-          </header>
-          {% set iconStyle = 'small' %}
-          {% include 'icons.njk' %}
-        </section>
+      <div class="px-4 sm:px-6 lg:px-16">
+        <div class="max-w-container mx-auto flex divide-x divide-gray-200">
+          <section class="flex-none w-1/2 pr-4 sm:pr-6 lg:pr-8 pt-6 sm:pt-8 pb-12 border-l border-transparent">
+            <header class="flex flex-wrap items-baseline mb-4 sm:mb-8">
+              <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Medium</h2>
+              <p class="hidden sm:block flex-auto text-gray-400 text-sm leading-5 font-medium">2px stroke weight, 24x24 bounding box</p>
+              <p class="hidden sm:block flex-none w-full text-sm leading-5 mt-3">For primary navigation and marketing sections, designed to be rendered at 24x24.</p>
+            </header>
+            {% set iconStyle = 'medium' %}
+            {% include 'icons.njk' %}
+          </section>
+          <section class="flex-none w-1/2 pl-4 sm:pl-6 lg:pl-8 pt-6 sm:pt-8 pb-12">
+            <header class="flex flex-wrap items-baseline mb-4 sm:mb-8">
+              <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Small</h2>
+              <p class="hidden sm:block flex-auto text-gray-400 text-sm leading-5 font-medium">Solid fill, 20x20 bounding box</p>
+              <p class="hidden sm:block flex-none w-full text-sm leading-5 mt-3">For buttons, form elements, and to support text, designed to be rendered at 20x20.</p>
+            </header>
+            {% set iconStyle = 'small' %}
+            {% include 'icons.njk' %}
+          </section>
+        </div>
       </div>
     </main>
 
-    <footer class="bg-gray-50 py-14 px-16 flex text-sm leading-5">
-      <div class="space-x-10 flex">
-        <div class="flex items-center space-x-2">
-          {{'img/tailwind-logo.svg' | build | safe}}
-          <p>
-            By the makers of
-            <a href="#" class="font-medium text-gray-900">@tailwindcss</a>
-          </p>
-        </div>
-        <div class="flex items-center space-x-2">
-          <div class="relative rounded-full overflow-hidden">
-            <img src="{{'img/steve.jpg' | build | safe}}" alt="" width="30" height="30">
-            <div class="absolute inset-0 rounded-full border border-black border-opacity-10"></div>
+    <footer class="bg-gray-50 py-14 px-4 sm:px-6 lg:px-16 text-sm leading-5">
+      <div class="max-w-container mx-auto flex">
+        <div class="space-x-10 flex">
+          <div class="flex items-center space-x-2">
+            {{'img/tailwind-logo.svg' | build | safe}}
+            <p>
+              By the makers of
+              <a href="#" class="font-medium text-gray-900">@tailwindcss</a>
+            </p>
           </div>
-          <p>
-            Designed by
-            <a href="https://twitter.com/steveschoger" class="font-medium text-gray-900">@steveschoger</a>
-          </p>
+          <div class="flex items-center space-x-2">
+            <div class="relative rounded-full overflow-hidden">
+              <img src="{{'img/steve.jpg' | build | safe}}" alt="" width="30" height="30">
+              <div class="absolute inset-0 rounded-full border border-black border-opacity-10"></div>
+            </div>
+            <p>
+              Designed by
+              <a href="https://twitter.com/steveschoger" class="font-medium text-gray-900">@steveschoger</a>
+            </p>
+          </div>
         </div>
+        <a href="#" class="flex items-center space-x-2 text-twitter-blue ml-auto font-medium">
+          <svg width="20" height="20" fill="currentColor">
+            <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"/>
+          </svg>
+          <p>Share on Twitter</p>
+        </a>
       </div>
-      <a href="#" class="flex items-center space-x-2 text-twitter-blue ml-auto font-medium">
-        <svg width="20" height="20" fill="currentColor">
-          <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"/>
-        </svg>
-        <p>Share on Twitter</p>
-      </a>
     </footer>
 
     <script>

@@ -21,6 +21,7 @@ module.exports = {
       },
       colors: {
         'twitter-blue': '#1DA1F2',
+        'purple-400-ish': '#A65FEC',
       },
       opacity: {
         10: '0.1',
@@ -28,6 +29,9 @@ module.exports = {
         20: '0.2',
         30: '0.3',
         40: '0.4',
+      },
+      maxWidth: {
+        container: '112rem',
       },
     },
   },
