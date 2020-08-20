@@ -25,6 +25,7 @@ module.exports = {
         10: '0.1',
         12: '0.12',
         20: '0.2',
+        30: '0.3',
         40: '0.4',
       },
     },
@@ -38,6 +39,16 @@ module.exports = {
       'focus-within',
       'group-focus-within',
     ],
+    textColor: [
+      'responsive',
+      'hover',
+      'focus',
+      'group-hover',
+      'group-focus-within',
+    ],
+    boxShadow: ['responsive', 'hover', 'focus', 'group-hover'],
+    translate: ['responsive', 'hover', 'focus', 'group-hover'],
+    backgroundOpacity: ['responsive', 'hover', 'focus', 'group-hover'],
   },
   plugins: [
     plugin(({ addVariant, e }) => {
