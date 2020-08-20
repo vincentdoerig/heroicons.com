@@ -17,6 +17,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        display: ['Gilroy', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         'twitter-blue': '#1DA1F2',
