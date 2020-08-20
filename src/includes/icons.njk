@@ -1,26 +1,26 @@
 <ul id="{{ iconStyle }}" class="grid gap-8 text-center text-xs leading-4" style="grid-template-columns:repeat(auto-fill,minmax(132px,1fr))">
   {% for icon in allIcons[iconStyle] %}
-    <li class="relative flex flex-col-reverse" data-name="{{ icon.name }}" data-style="{{ icon.style }}">
+    <li class="group relative flex flex-col-reverse" data-name="{{ icon.name }}" data-style="{{ icon.style }}">
       <h3>
         {{ icon.name }}
         {% if icon.new %}
-          <small class="absolute z-20 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full text-xs leading-5 font-medium px-2 pointer-events-none" style="background-color:#FFEA79;color:#A62F09">
+          <small class="absolute top-px right-px mt-1 mr-1 rounded-full text-xs leading-5 font-medium px-2 pointer-events-none bg-yellow-100 text-orange-700 group-hover:opacity-0 group-focus-within:opacity-0">
             <span class="sr-only">(</span>New<span class="sr-only">)</span>
           </small>
         {% endif %}
       </h3>
-      <div class="group hover:text-gray-300 focus-within:text-gray-300 relative rounded-lg mb-3 overflow-hidden">
-        <div class="absolute inset-0 flex items-center justify-center rounded-lg border border-gray-200">
+      <div class="relative rounded-lg mb-3 border border-gray-200 overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center rounded-lg">
           {{ icon.svg | safe }}
         </div>
-        <div class="bg-black bg-opacity-10 relative z-10 p-1 space-y-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100">
-          <button type="button" class="block w-full text-center font-medium bg-white rounded-md py-3 shadow text-gray-500" data-copy="html">
-            Copy HTML<span class="sr-only">
+        <div class="bg-white bg-opacity-75 relative z-10 p-1 space-y-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100">
+          <button type="button" class="block w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 rounded-md py-3 text-purple-700" data-copy="html">
+            Copy SVG<span class="sr-only">
               for
               {{ icon.name }}
               icon</span>
           </button>
-          <button type="button" class="block w-full text-center font-medium bg-white rounded-md py-3 shadow text-gray-500" data-copy="jsx">
+          <button type="button" class="block w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 rounded-md py-3 text-purple-700" data-copy="jsx">
             Copy JSX<span class="sr-only">
               for
               {{ icon.name }}
