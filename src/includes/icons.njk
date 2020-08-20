@@ -10,11 +10,11 @@
         {% endif %}
       </h3>
       <div class="relative rounded-lg mb-3 border border-gray-200 overflow-hidden">
-        <div class="absolute inset-0 flex items-center justify-center transform copied:-translate-y-3 transition-transform duration-300">
+        <div class="absolute inset-0 flex items-center justify-center transform copied:-translate-y-3 transition-transform duration-500 copied:duration-200 ease-in-out copied:ease-out">
           {{ icon.svg | safe }}
         </div>
-        <div class="absolute bottom-1 left-0 right-0 pointer-events-none text-center font-medium py-3 text-purple-700 opacity-0 copied:opacity-100 transform -translate-y-1 copied:translate-y-0 transition-all duration-300 copied:delay-100" aria-hidden="true">Copied!</div>
-        <div class="bg-white bg-opacity-75 relative z-10 p-1 space-y-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity duration-150">
+        <div class="absolute bottom-1 left-0 right-0 pointer-events-none text-center font-medium pb-4 text-purple-700 opacity-0 copied:opacity-100 transform transition-opacity duration-300 ease-out" aria-hidden="true">Copied!</div>
+        <div class="bg-white bg-opacity-75 relative z-10 p-1 space-y-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity ease-in-out duration-200 group-hover:duration-100 focus-within:duration-100">
           <button type="button" class="block w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 focus:bg-opacity-75 focus:outline-none rounded-md py-3 text-purple-700 transition-colors duration-150" data-copy="svg">
             Copy SVG<span class="sr-only">
               for

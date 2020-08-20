@@ -55,7 +55,7 @@ module.exports = {
     boxShadow: ['responsive', 'hover', 'focus', 'group-hover'],
     translate: ['responsive', 'hover', 'focus', 'group-hover', 'copied'],
     backgroundOpacity: ['responsive', 'hover', 'focus', 'group-hover'],
-    transitionDuration: ['responsive', 'copied'],
+    transitionDuration: ['responsive', 'group-hover', 'focus-within', 'copied'],
     transitionDelay: ['responsive', 'copied'],
   },
   plugins: [
