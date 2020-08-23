@@ -629,37 +629,3 @@ export default function Home({ medium, small }) {
     </>
   )
 }
-
-// export async function getStaticProps(_context) {
-//   const fs = require('fs')
-//   const path = require('path')
-
-//   function getIcons(dir, size) {
-//     return fs
-//       .readdirSync(path.resolve(process.cwd(), `node_modules/heroicons/${dir}`))
-//       .map((filename) => {
-//         let name = filename.replace(/\.svg$/, '')
-//         return {
-//           name,
-//           svg: fs
-//             .readFileSync(
-//               path.resolve(
-//                 process.cwd(),
-//                 `node_modules/heroicons/${dir}/${filename}`
-//               ),
-//               'utf8'
-//             )
-//             .replace('<svg', `<svg width="${size}" height="${size}"`)
-//             .replace(/>\s+</g, '><')
-//             .trim(),
-//         }
-//       })
-//   }
-
-//   return {
-//     props: {
-//       medium: getIcons('outline', 24),
-//       small: getIcons('solid', 20),
-//     },
-//   }
-// }
