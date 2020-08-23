@@ -69,7 +69,7 @@ function Icon({ icon, initialState = 'initial' }) {
   }, [state])
 
   function copy(event, as) {
-    if (state !== 'active') return
+    if (state === 'copied') return
     const button = event.target
     let indent = 1
     const svg = icon.svg
@@ -95,7 +95,6 @@ function Icon({ icon, initialState = 'initial' }) {
 
     if (as === 'svg') {
       navigator.clipboard.writeText(svg).then(() => {
-        button.blur()
         setState('copied')
       })
       return
@@ -113,7 +112,6 @@ function Icon({ icon, initialState = 'initial' }) {
     )
 
     navigator.clipboard.writeText(jsx).then(() => {
-      button.blur()
       setState('copied')
     })
   }
@@ -158,7 +156,7 @@ function Icon({ icon, initialState = 'initial' }) {
               }}
             >
               <Alert className="absolute bottom-1 left-0 right-0 pointer-events-none text-center font-medium pb-4 text-purple-700 transition-opacity duration-300 ease-out">
-                Copied!
+                Copied<span className="sr-only"> {icon.name}</span>!
               </Alert>
             </CSSTransition>
             <div
@@ -415,7 +413,7 @@ function Footer() {
                 style={{ width: 30, height: 30 }}
                 loading="lazy"
               />
-              <div className="absolute inset-0 rounded-full border border-black border-opacity-10"></div>
+              <div className="absolute inset-0 rounded-full border border-black border-opacity-10" />
             </div>
             <p>
               Designed by{' '}
