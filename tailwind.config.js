@@ -8,7 +8,7 @@ module.exports = {
   },
   purge: {
     mode: 'all',
-    content: ['src/**/*.{njk,js,ts}'],
+    content: ['src/**/*.js'],
     options: {
       keyframes: true,
     },
@@ -43,7 +43,6 @@ module.exports = {
       'group-hover',
       'focus-within',
       'group-focus-within',
-      'copied',
     ],
     textColor: [
       'responsive',
@@ -53,10 +52,14 @@ module.exports = {
       'group-focus-within',
     ],
     boxShadow: ['responsive', 'hover', 'focus', 'group-hover'],
-    translate: ['responsive', 'hover', 'focus', 'group-hover', 'copied'],
+    translate: ['responsive', 'hover', 'focus', 'group-hover'],
     backgroundOpacity: ['responsive', 'hover', 'focus', 'group-hover'],
-    transitionDuration: ['responsive', 'group-hover', 'focus-within', 'copied'],
-    transitionDelay: ['responsive', 'copied'],
+    transitionDuration: [
+      'responsive',
+      'group-hover',
+      'focus-within',
+      'group-focus-within',
+    ],
   },
   plugins: [
     plugin(({ addVariant, e }) => {
@@ -65,11 +68,6 @@ module.exports = {
           return `.group:focus-within .${e(
             `group-focus-within${separator}${className}`
           )}`
-        })
-      })
-      addVariant('copied', ({ modifySelectors, separator }) => {
-        modifySelectors(({ className }) => {
-          return `.copied .${e(`copied${separator}${className}`)}`
         })
       })
     }),

@@ -1,21 +1,26 @@
 {
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production eleventy",
-    "dev": "eleventy --serve"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "npm run build && next export && replace-in-file '/<link rel=\"preload\"[^>]+>/g' '' out/index.html --isRegex"
   },
-  "devDependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "@types/debounce": "^1.2.0",
-    "@types/match-sorter": "^4.0.0",
+  "dependencies": {
+    "@reach/alert": "^0.11.0",
     "autoprefixer": "^9.8.6",
-    "cssnano": "^4.1.10",
-    "debounce": "^1.2.0",
-    "esbuild": "^0.6.26",
+    "clsx": "^1.1.1",
+    "file-loader": "^6.0.0",
     "heroicons": "^0.3.7",
-    "html-minifier": "^4.0.0",
     "match-sorter": "^4.2.0",
-    "postcss": "^7.0.32",
-    "tailwindcss": "^1.7.2"
+    "next": "^9.5.2",
+    "raw-loader": "^4.0.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-transition-group": "^4.4.1",
+    "replace-in-file": "^6.1.0",
+    "simple-functional-loader": "^1.2.1",
+    "tailwindcss": "^1.7.2",
+    "zustand": "^3.0.1"
   }
 }
