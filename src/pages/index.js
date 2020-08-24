@@ -405,8 +405,8 @@ function Header({ version }) {
         </div>
         <div className="sm:pt-4 pb-10 sm:pb-14 flex flex-wrap items-center">
           <div className="w-full flex-none text-center xl:w-auto xl:flex-auto xl:text-left mt-10">
-            <h1 className="font-display text-white text-3xl sm:text-4xl leading-10 font-semibold">
-              Beautiful hand-crafted SVG icons,
+            <h1 className="font-display text-white text-3xl leading-9 font-semibold sm:text-4xl sm:leading-10">
+              Beautiful hand-crafted SVG icons,{' '}
               <span className="sm:block text-purple-300">
                 by the makers of{' '}
                 <a href="https://tailwindcss.com">Tailwind CSS</a>.
