@@ -399,7 +399,8 @@ function Header() {
             <h1 className="font-display text-white text-3xl sm:text-4xl leading-10 font-semibold">
               Beautiful hand-crafted SVG icons,
               <span className="sm:block text-purple-300">
-                by the makers of Tailwind CSS.
+                by the makers of{' '}
+                <a href="https://tailwindcss.com">Tailwind CSS</a>.
               </span>
             </h1>
             <dl className="flex flex-wrap justify-center xl:justify-start whitespace-no-wrap text-purple-100 font-medium mt-3 leading-5">
@@ -531,7 +532,10 @@ function Footer() {
             </svg>
             <p>
               By the makers of{' '}
-              <a href="#" className="font-medium text-gray-900">
+              <a
+                href="https://tailwindcss.com"
+                className="font-medium text-gray-900"
+              >
                 @tailwindcss
               </a>
             </p>
