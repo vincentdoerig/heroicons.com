@@ -4,7 +4,7 @@ import createStore from 'zustand'
 import clsx from 'clsx'
 import tags from '../data/tags'
 import Alert from '@reach/alert'
-import { CSSTransition } from 'react-transition-group'
+import { Transition } from '@tailwindui/react'
 
 const ENTER = 13
 const UP = 38
@@ -248,76 +248,81 @@ const Icon = memo(({ icon }) => {
             {icon.svg}
           </svg>
         </button>
-        <CSSTransition
-          in={state === 'copied'}
-          timeout={300}
-          mountOnEnter={false}
-          unmountOnExit={true}
-          classNames={{
-            enter: 'opacity-0',
-            enterActive: 'opacity-100',
-            exit: 'opacity-0',
-          }}
+        <Transition
+          show={state === 'copied'}
+          enter="transition-opacity duration-300 ease-out"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-300 ease-out"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
         >
-          <Alert className="absolute bottom-1 left-0 right-0 pointer-events-none text-center font-medium pb-4 text-purple-700 transition-opacity duration-300 ease-out">
-            Copied<span className="sr-only"> {icon.name}</span>!
-          </Alert>
-        </CSSTransition>
-        <CSSTransition
-          in={state === 'active'}
-          timeout={state === 'active' ? 100 : 200}
-          mountOnEnter={false}
-          unmountOnExit={true}
-          classNames={{
-            enter: 'opacity-0',
-            enterActive: 'opacity-100 duration-100',
-            exit: 'opacity-0 duration-200',
-          }}
+          {(ref) => (
+            <Alert
+              ref={ref}
+              className="absolute bottom-1 left-0 right-0 pointer-events-none text-center font-medium pb-4 text-purple-700"
+            >
+              Copied<span className="sr-only"> {icon.name}</span>!
+            </Alert>
+          )}
+        </Transition>
+        <Transition
+          show={state === 'active'}
+          enter="transition-opacity duration-100 ease-in-out"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-200 ease-in-out"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
         >
-          <div
-            id={`${icon.name}-${icon.type}`}
-            role="menu"
-            aria-labelledby={`${icon.name}-${icon.type}-btn`}
-            tabIndex={-1}
-            aria-activedescendant={
-              activeType ? `${icon.name}-${icon.type}-${activeType}` : undefined
-            }
-            className={clsx(
-              'absolute inset-0 z-10 p-1 transition-opacity ease-in-out',
-              { 'pointer-events-none': state !== 'active' }
-            )}
-          >
-            <div className="absolute top-1/2 left-1/2 w-8 h-8 -ml-4 -mt-4 bg-white bg-opacity-75" />
+          {(ref) => (
             <div
-              id={`${icon.name}-${icon.type}-svg`}
+              ref={ref}
+              id={`${icon.name}-${icon.type}`}
+              role="menu"
+              aria-labelledby={`${icon.name}-${icon.type}-btn`}
               tabIndex={-1}
-              role="menuitem"
-              className={clsx(
-                'relative cursor-pointer leading-42px font-medium bg-purple-200 bg-opacity-25 rounded-md text-purple-700 transition-colors duration-150 outline-none',
-                { 'bg-opacity-75': activeType === 'svg' }
-              )}
-              onMouseEnter={() => setActiveType('svg')}
-              onMouseLeave={() => setActiveType(undefined)}
-              onClick={() => copy('svg')}
+              aria-activedescendant={
+                activeType
+                  ? `${icon.name}-${icon.type}-${activeType}`
+                  : undefined
+              }
+              className={clsx('absolute inset-0 z-10 p-1', {
+                'pointer-events-none': state !== 'active',
+              })}
             >
-              Copy SVG
+              <div className="absolute top-1/2 left-1/2 w-8 h-8 -ml-4 -mt-4 bg-white bg-opacity-75" />
+              <div
+                id={`${icon.name}-${icon.type}-svg`}
+                tabIndex={-1}
+                role="menuitem"
+                className={clsx(
+                  'relative cursor-pointer leading-42px font-medium bg-purple-200 bg-opacity-25 rounded-md text-purple-700 transition-colors duration-150 outline-none',
+                  { 'bg-opacity-75': activeType === 'svg' }
+                )}
+                onMouseEnter={() => setActiveType('svg')}
+                onMouseLeave={() => setActiveType(undefined)}
+                onClick={() => copy('svg')}
+              >
+                Copy SVG
+              </div>
+              <div
+                id={`${icon.name}-${icon.type}-jsx`}
+                tabIndex={-1}
+                role="menuitem"
+                className={clsx(
+                  'relative cursor-pointer mt-1 leading-42px font-medium bg-purple-200 bg-opacity-25 rounded-md text-purple-700 transition-colors duration-150 outline-none',
+                  { 'bg-opacity-75': activeType === 'jsx' }
+                )}
+                onMouseEnter={() => setActiveType('jsx')}
+                onMouseLeave={() => setActiveType(undefined)}
+                onClick={() => copy('jsx')}
+              >
+                Copy JSX
+              </div>
             </div>
-            <div
-              id={`${icon.name}-${icon.type}-jsx`}
-              tabIndex={-1}
-              role="menuitem"
-              className={clsx(
-                'relative cursor-pointer mt-1 leading-42px font-medium bg-purple-200 bg-opacity-25 rounded-md text-purple-700 transition-colors duration-150 outline-none',
-                { 'bg-opacity-75': activeType === 'jsx' }
-              )}
-              onMouseEnter={() => setActiveType('jsx')}
-              onMouseLeave={() => setActiveType(undefined)}
-              onClick={() => copy('jsx')}
-            >
-              Copy JSX
-            </div>
-          </div>
-        </CSSTransition>
+          )}
+        </Transition>
       </div>
     </li>
   )
