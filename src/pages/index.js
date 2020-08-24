@@ -483,12 +483,8 @@ function Header() {
                     />
                   </svg>
                   Download all
-                  <span className="sr-only"> (Includes Figma file)</span>
                 </div>
               </a>
-              <p className="text-sm leading-5 font-medium text-purple-200 text-center mt-3">
-                Includes Figma file
-              </p>
             </div>
             <a
               href="https://github.com/tailwindlabs/heroicons"
