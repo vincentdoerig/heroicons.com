@@ -12,6 +12,10 @@ const DOWN = 40
 const SPACE = 32
 const ESC = 27
 
+const SHARE_LINK = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+  'Heroicons'
+)}&url=${encodeURIComponent('https://heroicons.com')}`
+
 function importIcons(r, type, attrs) {
   return r.keys().map((fileName) => {
     const name = fileName.substr(2).replace(/\.svg$/, '')
@@ -373,7 +377,7 @@ function Header({ version }) {
           </svg>
           <div className="flex space-x-10 ml-auto">
             <a
-              href="#"
+              href={SHARE_LINK}
               className="flex items-center space-x-2 text-white hover:text-purple-200 transition-colors duration-150 font-semibold"
             >
               <svg
@@ -564,7 +568,7 @@ function Footer() {
           </div>
         </div>
         <a
-          href="#"
+          href={SHARE_LINK}
           className="inline-flex items-center space-x-2 text-twitter-blue ml-auto font-medium"
         >
           <svg width="20" height="20" fill="currentColor">
