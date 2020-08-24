@@ -353,7 +353,7 @@ function Icons({ icons, className = '', filter }) {
   )
 }
 
-function Header() {
+function Header({ version }) {
   return (
     <header className="bg-gradient-to-r from-purple-700 to-purple-400-ish px-4 sm:px-6 lg:px-16">
       <div className="max-w-container mx-auto divide-y divide-black divide-opacity-12">
@@ -464,7 +464,7 @@ function Header() {
                     />
                   </svg>
                 </dt>
-                <dd>Version 1.7.1</dd>
+                <dd>Version {version}</dd>
               </div>
             </dl>
           </div>
@@ -752,10 +752,10 @@ function IconsContainer() {
   )
 }
 
-export default function Home({ medium, small }) {
+export default function Home({ version }) {
   return (
     <>
-      <Header />
+      <Header version={version} />
       <main className="bg-white">
         <Search />
         <div className="px-4 sm:px-6 lg:px-16">
@@ -765,4 +765,8 @@ export default function Home({ medium, small }) {
       <Footer />
     </>
   )
+}
+
+export function getStaticProps() {
+  return { props: { version: require('heroicons/package.json').version } }
 }
