@@ -21,7 +21,7 @@ module.exports = {
       },
       colors: {
         'twitter-blue': '#1DA1F2',
-        'purple-400-ish': '#A65FEC',
+        grape: '#A65FEC',
       },
       opacity: {
         10: '0.1',
@@ -39,14 +39,7 @@ module.exports = {
     },
   },
   variants: {
-    opacity: [
-      'responsive',
-      'hover',
-      'focus',
-      'group-hover',
-      'focus-within',
-      'group-focus-within',
-    ],
+    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
     textColor: [
       'responsive',
       'hover',
@@ -57,12 +50,6 @@ module.exports = {
     boxShadow: ['responsive', 'hover', 'focus', 'group-hover'],
     translate: ['responsive', 'hover', 'focus', 'group-hover'],
     backgroundOpacity: ['responsive', 'hover', 'focus', 'group-hover'],
-    transitionDuration: [
-      'responsive',
-      'group-hover',
-      'focus-within',
-      'group-focus-within',
-    ],
   },
   plugins: [
     plugin(({ addVariant, e }) => {

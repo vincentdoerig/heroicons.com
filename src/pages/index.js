@@ -359,7 +359,7 @@ function Icons({ icons, className = '', filter }) {
 
 function Header({ version }) {
   return (
-    <header className="bg-gradient-to-r from-purple-700 to-purple-400-ish px-4 sm:px-6 lg:px-16">
+    <header className="bg-gradient-to-r from-purple-700 to-grape px-4 sm:px-6 lg:px-16">
       <div className="max-w-container mx-auto divide-y divide-black divide-opacity-12">
         <div className="py-6 flex items-center text-sm leading-5">
           <svg width="168" height="34" fill="none">
