@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, memo } from 'react'
 import matchSorter from 'match-sorter'
 import createStore from 'zustand'
 import clsx from 'clsx'
@@ -6,24 +6,40 @@ import tags from '../data/tags'
 import Alert from '@reach/alert'
 import { CSSTransition } from 'react-transition-group'
 
-function importIcons(r, attrs) {
+const ENTER = 13
+const UP = 38
+const DOWN = 40
+const SPACE = 32
+const ESC = 27
+
+function importIcons(r, type, attrs) {
   return r.keys().map((fileName) => {
     const name = fileName.substr(2).replace(/\.svg$/, '')
     return {
       name,
+      type,
       tags: tags[name] || [],
-      svg: `<svg ${attrs}>${r(fileName).default}</svg>`,
+      svg: r(fileName).default,
+      attrs,
     }
   })
 }
 
 const iconsMedium = importIcons(
   require.context(`heroicons/outline/`, false, /\.svg$/),
-  'width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"'
+  'md',
+  {
+    width: 24,
+    height: 24,
+    fill: 'none',
+    viewBox: '0 0 24 24',
+    stroke: 'currentColor',
+  }
 )
 const iconsSmall = importIcons(
   require.context(`heroicons/solid/`, false, /\.svg$/),
-  'width="20" height="20" viewBox="0 0 20 20" fill="currentColor"'
+  'sm',
+  { width: 20, height: 20, viewBox: '0 0 20 20', fill: 'currentColor' }
 )
 const iconCount = iconsMedium.length
 
@@ -42,150 +58,270 @@ const useStore = createStore((set) => ({
   },
 }))
 
-function Icon({ icon, initialState = 'initial' }) {
-  const [state, setState] = useState(initialState)
+function stringifyAttrs(attrs, filter = () => true) {
+  let str = Object.keys(attrs)
+    .filter(filter)
+    .map((attr) =>
+      /^[0-9.]+$/.test(attrs[attr])
+        ? `${attr}={${attrs[attr]}}`
+        : `${attr}="${attrs[attr]}"`
+    )
+    .join(' ')
+  if (str) return ` ${str}`
+  return str
+}
+
+function castArray(value) {
+  return Array.isArray(value) ? value : [value]
+}
+
+function serialize(component) {
+  let code = ''
+  let { children, ...props } = component.props
+  if (typeof component.type === 'string') {
+    if (children) {
+      code += `<${component.type}${stringifyAttrs(props)}>${castArray(children)
+        .map(serialize)
+        .join('')}</${component.type}>`
+    } else {
+      code += `<${component.type}${stringifyAttrs(props)} />`
+    }
+  } else {
+    code += castArray(children).map(serialize).join('')
+  }
+  return code
+}
+
+function copyIcon(icon, as) {
+  let jsx =
+    `<svg` +
+    stringifyAttrs(
+      { xmlns: 'http://www.w3.org/2000/svg', ...icon.attrs },
+      (a) => !['width', 'height'].includes(a)
+    ) +
+    `>` +
+    serialize(icon.svg) +
+    `</svg>`
+
+  let indent = 1
+  jsx = jsx
+    .replace(/(\/?>)(<\/?)/g, (_, gt, lt) => {
+      let closing = /^\//.test(gt) || /\/$/.test(lt)
+      let bothClosing = /^\//.test(gt) && /\/$/.test(lt)
+      if (closing) {
+        indent--
+      }
+      if (bothClosing) {
+        indent--
+      }
+      let str = `${gt}\n` + '  '.repeat(Math.max(indent, 0)) + lt
+      if (!closing) {
+        indent++
+      }
+      return str
+    })
+    .replace(/"\/>/g, '" />')
+
+  if (as === 'jsx') {
+    return navigator.clipboard.writeText(jsx)
+  }
+
+  let svg = jsx
+    .replace(/=\{([^}]+)\}/g, '="$1"')
+    .replace(
+      /(\s)([a-z]+)="/gi,
+      (_, ws, attr) =>
+        ws +
+        attr.replace(
+          /([a-z])([A-Z])/g,
+          (_, p1, p2) => `${p1}-${p2.toLowerCase()}`
+        ) +
+        '="'
+    )
+    .replace('view-box=', 'viewBox=')
+
+  return navigator.clipboard.writeText(svg)
+}
+
+const Icon = memo(({ icon }) => {
+  const [state, setState] = useState('idle')
+  const [activeType, setActiveType] = useState(undefined)
+
+  function copy(as) {
+    if (state === 'copied') return
+    copyIcon(icon, as).then(() => {
+      setState('copied')
+    })
+  }
+
+  function activate() {
+    if (state === 'idle') {
+      setState('active')
+    }
+  }
+
+  function deactivate() {
+    if (state === 'active') {
+      setState('idle')
+      setActiveType(undefined)
+    }
+  }
+
+  function onKeyDown(e) {
+    if ([ENTER, SPACE, UP, DOWN, ESC].includes(e.which)) {
+      e.preventDefault()
+    }
+    if (state === 'active' && e.which === ESC) {
+      setState('idle')
+      setActiveType(undefined)
+    } else if (state === 'idle' && [ENTER, SPACE, DOWN].includes(e.which)) {
+      setState('active')
+      setActiveType('svg')
+    } else if (activeType === 'svg' && e.which === DOWN) {
+      setActiveType('jsx')
+    } else if (activeType === 'jsx' && e.which === UP) {
+      setActiveType('svg')
+    } else if (
+      state === 'active' &&
+      activeType &&
+      [ENTER, SPACE].includes(e.which)
+    ) {
+      copy(activeType)
+    }
+  }
 
   useEffect(() => {
-    if (state === 'initial') {
-      setState('active')
-    } else if (state === 'copied') {
+    if (state === 'copied') {
       const handler = window.setTimeout(() => {
-        setState('inactive')
+        setState('idle')
       }, 1000)
       return () => {
         window.clearTimeout(handler)
       }
-    } else if (state === 'inactive') {
-      function reactivate() {
-        setState('active')
-      }
-      window.addEventListener('mousemove', reactivate)
-      window.addEventListener('focus', reactivate, true)
-      return () => {
-        window.removeEventListener('mousemove', reactivate)
-        window.removeEventListener('focus', reactivate, true)
-      }
     }
   }, [state])
-
-  function copy(event, as) {
-    if (state === 'copied') return
-    const button = event.target
-    let indent = 1
-    const svg = icon.svg
-      .replace(/>\s+</g, '><')
-      .replace(/\s+width="[0-9]+" height="[0-9]+"\s+/, ' ')
-      .replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"')
-      .replace(/(\/?>)(<\/?)/g, (_, gt, lt) => {
-        let closing = /^\//.test(gt) || /\/$/.test(lt)
-        let bothClosing = /^\//.test(gt) && /\/$/.test(lt)
-        if (closing) {
-          indent--
-        }
-        if (bothClosing) {
-          indent--
-        }
-        let str = `${gt}\n` + '  '.repeat(Math.max(indent, 0)) + lt
-        if (!closing) {
-          indent++
-        }
-        return str
-      })
-      .replace(/"\/>/g, '" />')
-
-    if (as === 'svg') {
-      navigator.clipboard.writeText(svg).then(() => {
-        setState('copied')
-      })
-      return
-    }
-
-    const jsx = svg.replace(
-      /(\s)([a-z-]+)="([^"]+)"/gi,
-      (_, prefix, attr, value) => {
-        const jsxValue = /^[0-9.]+$/.test(value) ? `{${value}}` : `"${value}"`
-        return `${prefix}${attr.replace(
-          /-([a-z])/gi,
-          (_, letter) => `${letter.toUpperCase()}`
-        )}=${jsxValue}`
-      }
-    )
-
-    navigator.clipboard.writeText(jsx).then(() => {
-      setState('copied')
-    })
-  }
 
   return (
     <li
       className={clsx('relative flex flex-col-reverse', {
         group: state === 'active',
       })}
+      onMouseEnter={activate}
+      onMouseLeave={deactivate}
     >
-      <h3>
+      <h3 id={`${icon.name}-name`}>
         {icon.name}
         {icon.tags.includes('new') && (
-          <small className="absolute top-px right-px mt-1 mr-1 rounded-full text-xs leading-5 font-medium px-2 pointer-events-none bg-yellow-100 text-orange-700 group-hover:opacity-0 group-focus-within:opacity-0 transition-opacity duration-150">
+          <small
+            className={clsx(
+              'absolute top-px right-px mt-1 mr-1 rounded-full text-xs leading-5 font-medium px-2 pointer-events-none bg-yellow-100 text-orange-700 transition-opacity',
+              {
+                'opacity-0 duration-100': state === 'active',
+                'duration-200': state !== 'active',
+              }
+            )}
+          >
             <span className="sr-only">(</span>New
             <span className="sr-only">)</span>
           </small>
         )}
       </h3>
-      <div className="relative rounded-lg mb-3 border border-gray-200 overflow-hidden h-24">
-        <div
-          className={clsx(
-            'absolute inset-0 flex items-center justify-center transform transition-transform',
-            {
+      <div className="relative mb-3 h-24">
+        <button
+          type="button"
+          onKeyDown={onKeyDown}
+          onBlur={deactivate} // TODO
+          id={`${icon.name}-${icon.type}-btn`}
+          aria-label={icon.name}
+          aria-haspopup="true"
+          aria-controls={`${icon.name}-${icon.type}`}
+          aria-expanded={state === 'active' ? true : undefined}
+          className="absolute inset-0 w-full flex items-center justify-center rounded-lg border border-gray-200 cursor-auto"
+        >
+          <svg
+            {...icon.attrs}
+            className={clsx('transform transition-transform', {
               '-translate-y-3 duration-200 ease-out': state === 'copied',
               'duration-500 ease-in-out': state !== 'copied',
+            })}
+          >
+            {icon.svg}
+          </svg>
+        </button>
+        <CSSTransition
+          in={state === 'copied'}
+          timeout={300}
+          mountOnEnter={false}
+          unmountOnExit={true}
+          classNames={{
+            enter: 'opacity-0',
+            enterActive: 'opacity-100',
+            exit: 'opacity-0',
+          }}
+        >
+          <Alert className="absolute bottom-1 left-0 right-0 pointer-events-none text-center font-medium pb-4 text-purple-700 transition-opacity duration-300 ease-out">
+            Copied<span className="sr-only"> {icon.name}</span>!
+          </Alert>
+        </CSSTransition>
+        <CSSTransition
+          in={state === 'active'}
+          timeout={state === 'active' ? 100 : 200}
+          mountOnEnter={false}
+          unmountOnExit={true}
+          classNames={{
+            enter: 'opacity-0',
+            enterActive: 'opacity-100 duration-100',
+            exit: 'opacity-0 duration-200',
+          }}
+        >
+          <div
+            id={`${icon.name}-${icon.type}`}
+            role="menu"
+            aria-labelledby={`${icon.name}-${icon.type}-btn`}
+            tabIndex={-1}
+            aria-activedescendant={
+              activeType ? `${icon.name}-${icon.type}-${activeType}` : undefined
             }
-          )}
-          dangerouslySetInnerHTML={{ __html: icon.svg }}
-        />
-        {state !== 'initial' && (
-          <>
-            <CSSTransition
-              in={state === 'copied'}
-              timeout={300}
-              mountOnEnter={false}
-              unmountOnExit={true}
-              classNames={{
-                enter: 'opacity-0',
-                enterActive: 'opacity-100',
-                exit: 'opacity-0',
-              }}
-            >
-              <Alert className="absolute bottom-1 left-0 right-0 pointer-events-none text-center font-medium pb-4 text-purple-700 transition-opacity duration-300 ease-out">
-                Copied<span className="sr-only"> {icon.name}</span>!
-              </Alert>
-            </CSSTransition>
+            className={clsx(
+              'absolute inset-0 z-10 p-1 transition-opacity ease-in-out',
+              { 'pointer-events-none': state !== 'active' }
+            )}
+          >
+            <div className="absolute top-1/2 left-1/2 w-8 h-8 -ml-4 -mt-4 bg-white bg-opacity-75" />
             <div
+              id={`${icon.name}-${icon.type}-svg`}
+              tabIndex={-1}
+              role="menuitem"
               className={clsx(
-                'bg-white bg-opacity-75 absolute inset-0 z-10 flex flex-col p-1 space-y-1 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity ease-in-out duration-200 group-hover:duration-100 group-focus-within:duration-100',
-                { 'pointer-events-none': state !== 'active' }
+                'relative cursor-pointer leading-42px font-medium bg-purple-200 bg-opacity-25 rounded-md text-purple-700 transition-colors duration-150 outline-none',
+                { 'bg-opacity-75': activeType === 'svg' }
               )}
+              onMouseEnter={() => setActiveType('svg')}
+              onMouseLeave={() => setActiveType(undefined)}
+              onClick={() => copy('svg')}
             >
-              <button
-                type="button"
-                className="flex-auto w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 focus:bg-opacity-75 focus:outline-none rounded-md text-purple-700 transition-colors duration-150"
-                onClick={(e) => copy(e, 'svg')}
-              >
-                Copy SVG<span className="sr-only"> for {icon.name} icon</span>
-              </button>
-              <button
-                type="button"
-                className="flex-auto w-full text-center font-medium bg-purple-200 bg-opacity-25 hover:bg-opacity-75 focus:bg-opacity-75 focus:outline-none rounded-md text-purple-700 transition-colors duration-150"
-                onClick={(e) => copy(e, 'jsx')}
-              >
-                Copy JSX<span className="sr-only"> for {icon.name} icon</span>
-              </button>
+              Copy SVG
             </div>
-          </>
-        )}
+            <div
+              id={`${icon.name}-${icon.type}-jsx`}
+              tabIndex={-1}
+              role="menuitem"
+              className={clsx(
+                'relative cursor-pointer mt-1 leading-42px font-medium bg-purple-200 bg-opacity-25 rounded-md text-purple-700 transition-colors duration-150 outline-none',
+                { 'bg-opacity-75': activeType === 'jsx' }
+              )}
+              onMouseEnter={() => setActiveType('jsx')}
+              onMouseLeave={() => setActiveType(undefined)}
+              onClick={() => copy('jsx')}
+            >
+              Copy JSX
+            </div>
+          </div>
+        </CSSTransition>
       </div>
     </li>
   )
-}
+})
 
 function Icons({ icons, className = '', filter }) {
   const [renderAll, setRenderAll] = useState(false)
@@ -205,12 +341,8 @@ function Icons({ icons, className = '', filter }) {
       className={`grid gap-8 text-center text-xs leading-4 ${className}`}
       style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(132px, 1fr))' }}
     >
-      {filteredIcons.slice(0, renderAll ? undefined : 46).map((icon, i) => (
-        <Icon
-          key={icon.name}
-          icon={icon}
-          initialState={i < 46 ? 'initial' : 'active'}
-        />
+      {filteredIcons.slice(0, renderAll ? undefined : 38).map((icon, i) => (
+        <Icon key={icon.name} icon={icon} />
       ))}
     </ul>
   )
@@ -509,7 +641,7 @@ function Search() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={`Search all ${iconsMedium.length} icons (Press “/” to focus)`}
-          className="flex-auto py-6 text-gray-500 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400"
+          className="flex-auto py-6 text-base leading-6 text-gray-500 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400"
         />
       </div>
     </form>

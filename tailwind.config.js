@@ -33,6 +33,9 @@ module.exports = {
       maxWidth: {
         container: '112rem',
       },
+      lineHeight: {
+        '42px': '2.625rem',
+      },
     },
   },
   variants: {
