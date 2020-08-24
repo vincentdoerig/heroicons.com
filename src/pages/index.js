@@ -398,7 +398,7 @@ function Header({ version }) {
             >
               Looking for Heroicons Classic?{' '}
               <strong className="font-semibold text-white group-hover:text-purple-200 transition-colors duration-150">
-                Get them here ->
+                Get them here &rarr;
               </strong>
             </a>
           </div>
