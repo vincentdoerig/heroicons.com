@@ -541,7 +541,7 @@ function Footer() {
                 href="https://tailwindcss.com"
                 className="font-medium text-gray-900"
               >
-                @tailwindcss
+                tailwindcss
               </a>
             </p>
           </div>
