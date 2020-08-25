@@ -2,9 +2,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && replace-in-file '/<link rel=\"preload\"[^>]+>/g' '' .next/server/pages/index.html --isRegex",
     "start": "next start",
-    "export": "npm run build && replace-in-file '/<link rel=\"preload\"[^>]+>/g' '' .next/server/pages/index.html --isRegex && next export"
+    "export": "npm run build && next export"
   },
   "dependencies": {
     "@reach/alert": "^0.11.0",
