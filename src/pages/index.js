@@ -235,7 +235,11 @@ const Icon = memo(({ icon }) => {
         <button
           type="button"
           onKeyDown={onKeyDown}
-          onBlur={deactivate} // TODO
+          onBlur={() => {
+            window.setTimeout(() => {
+              deactivate()
+            }, 0)
+          }}
           id={`${icon.name}-${icon.type}-btn`}
           aria-label={icon.name}
           aria-haspopup="true"
