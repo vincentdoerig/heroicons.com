@@ -792,6 +792,7 @@ export default function Home({ version }) {
           property="og:description"
           content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS."
         />
+        <title>Heroicons</title>
         <meta property="og:title" content="Heroicons" />
         <meta
           property="og:image"
