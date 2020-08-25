@@ -475,7 +475,10 @@ function Header({ version }) {
           </div>
           <div className="w-full sm:w-auto flex-none flex flex-col-reverse sm:flex-row sm:items-start space-y-3 space-y-reverse sm:space-y-0 sm:space-x-4 mt-10 mx-auto xl:mx-0">
             <div>
-              <a href={`https://github.com/tailwindlabs/heroicons/archive/v${version}.zip`} className="group flex">
+              <a
+                href={`https://github.com/tailwindlabs/heroicons/archive/v${version}.zip`}
+                className="group flex"
+              >
                 <div className="w-full sm:w-auto inline-flex items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                   <svg
                     width="24"
@@ -761,21 +764,54 @@ export default function Home({ version }) {
   return (
     <>
       <Head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <meta content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS." name="description" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <meta
+          content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS."
+          name="description"
+        />
         <meta property="og:url" content="https://heroicons.com" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Heroicons" />
-        <meta property="og:description" content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS." />
+        <meta
+          property="og:description"
+          content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS."
+        />
         <meta property="og:title" content="Heroicons" />
-        <meta property="og:image" content={`https://heroicons.com${require('../img/social-card.jpg').default}`} />
+        <meta
+          property="og:image"
+          content={`https://heroicons.com${
+            require('../img/social-card.jpg').default
+          }`}
+        />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@tailwindlabs" />
         <meta name="twitter:title" content="Heroicons" />
-        <meta name="twitter:description" content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS." />
-        <meta name="twitter:image" content={`https://heroicons.com${require('../img/social-card.jpg').default}`} />
+        <meta
+          name="twitter:description"
+          content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS."
+        />
+        <meta
+          name="twitter:image"
+          content={`https://heroicons.com${
+            require('../img/social-card.jpg').default
+          }`}
+        />
       </Head>
       <Header version={version} />
       <main className="bg-white">
