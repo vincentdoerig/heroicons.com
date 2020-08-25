@@ -14,7 +14,7 @@ const SPACE = 32
 const ESC = 27
 
 const SHARE_LINK = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-  'Heroicons'
+  'Check out Heroicons by @steveschoger and the @tailwindcss team 😍'
 )}&url=${encodeURIComponent('https://heroicons.com')}`
 
 function importIcons(r, type, attrs) {
