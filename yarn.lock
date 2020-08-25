@@ -2837,10 +2837,10 @@ he@1.1.1:
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
   integrity sha1-k0EP0hsAlzUVH4howvJx80J+I/0=
 
-heroicons@^0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/heroicons/-/heroicons-0.3.7.tgz#0ec4c093fa9db4d8f4fa17e38af8b6a19be59833"
-  integrity sha512-2fhfSKuPpFIYaLshYL/BV+b/S4hES9Ykh0nNt0adU6l4W5gAwhmkXfYRyxWsayrdHZBr6oc4pLqyedRJk3wWRA==
+heroicons@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/heroicons/-/heroicons-0.4.0.tgz#6472b022bd689820ad49cbc84694d6f3a255fa30"
+  integrity sha512-CCPEBzBOJrliia0QL5tbR2E5MNlcrYcJhEB4m758RKh7h0vf9BjCqeOzKkIvASYPdOVld546Tixkg2i5ZAnkgA==
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
