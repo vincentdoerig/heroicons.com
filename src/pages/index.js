@@ -213,6 +213,7 @@ const Icon = memo(({ icon }) => {
       })}
       onMouseEnter={activate}
       onMouseLeave={deactivate}
+      onClick={activate}
     >
       <h3 id={`${icon.name}-name`}>
         {icon.name}
