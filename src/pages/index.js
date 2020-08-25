@@ -770,12 +770,12 @@ export default function Home({ version }) {
         <meta property="og:site_name" content="Heroicons" />
         <meta property="og:description" content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS." />
         <meta property="og:title" content="Heroicons" />
-        <meta property="og:image" content="https://heroicons.com/img/social-card.jpg" />
+        <meta property="og:image" content={require('../img/social-card.jpg').default} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@tailwindlabs" />
         <meta name="twitter:title" content="Heroicons" />
         <meta name="twitter:description" content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS." />
-        <meta name="twitter:image" content="https://heroicons.com/img/social-card.jpg" />
+        <meta name="twitter:image" content={require('../img/social-card.jpg').default} />
       </Head>
       <Header version={version} />
       <main className="bg-white">
