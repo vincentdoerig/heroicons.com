@@ -4,7 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "npm run build && next export && replace-in-file '/<link rel=\"preload\"[^>]+>/g' '' out/index.html --isRegex"
+    "export": "npm run build && replace-in-file '/<link rel=\"preload\"[^>]+>/g' '' .next/server/pages/index.html --isRegex && next export"
   },
   "dependencies": {
     "@reach/alert": "^0.11.0",
