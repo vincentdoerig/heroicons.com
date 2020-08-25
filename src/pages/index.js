@@ -543,7 +543,7 @@ function Footer() {
               By the makers of{' '}
               <a
                 href="https://tailwindcss.com"
-                className="font-medium text-gray-900"
+                className="font-medium text-gray-900 hover:text-gray-500 transition-colors duration-150"
               >
                 tailwindcss
               </a>
@@ -564,7 +564,7 @@ function Footer() {
               Designed by{' '}
               <a
                 href="https://twitter.com/steveschoger"
-                className="font-medium text-gray-900"
+                className="font-medium text-gray-900 hover:text-gray-500 transition-colors duration-150"
               >
                 @steveschoger
               </a>
