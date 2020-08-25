@@ -767,19 +767,19 @@ export default function Home({ version }) {
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/apple-touch-icon.png"
+          href={require('../img/apple-touch-icon.png').default}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/favicon-32x32.png"
+          href={require('../img/favicon-32x32.png').default}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/favicon-16x16.png"
+          href={require('../img/favicon-16x16.png').default}
         />
         <meta
           content="Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS."
